@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SchemaMarkup from '../../components/SchemaMarkup.astro';
+import StepsForm from '../../components/StepsForm.astro';
+
+export async function getStaticPaths() {
+  const guideEntries = await getCollection('guides');
+  return guideEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const title = `${entry.data.title} | Devis IRVE`;
+const description = entry.data.description;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Guides", href: "/guides/" },
+  { label: entry.data.title }
+];
+
+// Fetch other guides to display as recommendations
+const allGuides = await getCollection('guides');
+const recommended = allGuides
+  .filter(g => g.slug !== entry.slug)
+  .slice(0, 3);
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="static-page-section" style="padding: 60px 0; background-color: var(--bg);">
+    <div class="container">
+      <div class="two-column-layout">
+        
+        <!-- Main Article Content -->
+        <article class="static-main-content rich-text" style="background: var(--card-bg); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+          <div style="margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 25px;">
+            <span style="background: var(--primary-light); color: var(--primary); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase;">
+              📖 Guide Pratique
+            </span>
+            <h1 style="font-family: var(--font-heading); font-size: 34px; font-weight: 700; color: var(--primary); line-height: 1.25; margin: 15px 0 10px;">
+              {entry.data.title}
+            </h1>
+            <div style="font-size: 13.5px; color: var(--text-muted); display: flex; gap: 15px; flex-wrap: wrap;">
+              <span>✍️ Par <strong>{entry.data.author}</strong></span>
+              <span>📅 Mis à jour le : <strong>{entry.data.publishDate}</strong></span>
+            </div>
+          </div>
+
+          {entry.data.image && (
+            <img src={entry.data.image} alt={entry.data.title} style="width: 100%; height: auto; max-height: 420px; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 30px; border: 1.5px solid var(--border-color); display: block;" />
+          )}
+
+          <div class="article-body">
+            <Content />
+          </div>
+
+          <!-- Bottom CTA -->
+          <div style="margin-top: 50px; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); color: white; padding: 35px; border-radius: var(--radius-md); text-align: center;">
+            <h3 style="color: white; margin-top: 0; font-family: var(--font-heading); font-size: 22px;">Prêt à installer votre borne dans les Alpes-Maritimes ?</h3>
+            <p style="color: var(--primary-light); font-size: 14.5px; max-width: 500px; margin: 10px auto 25px; line-height: 1.5;">
+              Calculez le reste à charge précis pour votre modèle de voiture et comparez les tarifs de 3 électriciens qualifiés IRVE de votre commune.
+            </p>
+            <a href="#devis-form-widget" style="display: inline-block; background: var(--accent); color: var(--primary); font-family: var(--font-heading); font-weight: 700; padding: 12px 28px; border-radius: 50px; text-decoration: none; transition: var(--transition);">
+              Estimer mes aides &rarr;
+            </a>
+          </div>
+        </article>
+
+        <!-- Sidebar with Lead Form -->
+        <aside class="static-sidebar" id="devis-form-widget">
+          <div class="sidebar-widget bg-purple-gradient" style="padding: 25px;">
+            <h3 style="margin-top: 0; color: white;">🧮 Devis Borne Gratuit</h3>
+            <p style="color: var(--primary-light); font-size: 13px; margin-bottom: 20px;">Estimez vos primes d'État en 2 minutes et comparez les électriciens locaux.</p>
+            <StepsForm />
+          </div>
+
+          <div class="sidebar-widget">
+            <h3>📖 Autres guides utiles</h3>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+              {recommended.map(g => (
+                <a href={`/guides/${g.slug}/`} style="text-decoration: none; color: inherit; display: block; group">
+                  <h4 style="font-size: 13.5px; color: var(--secondary); font-weight: 600; margin: 0 0 4px; line-height: 1.4; transition: var(--transition);">
+                    {g.data.title}
+                  </h4>
+                  <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4; margin: 0;">
+                    {g.data.description.substring(0, 90)}...
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Layout>

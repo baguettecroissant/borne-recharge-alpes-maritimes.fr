@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SchemaMarkup from '../../components/SchemaMarkup.astro';
+import config from '../../data/config.json';
+
+const allGuides = await getCollection('guides');
+
+const title = `Guides et Conseils Borne de Recharge IRVE | ${config.brandName}`;
+const description = `Retrouvez tous nos guides pratiques sur l'installation de bornes de recharge pour voiture électrique dans les Alpes-Maritimes : tarifs, aides, design et copropriété.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Guides & Conseils" }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section style="padding: 60px 0 90px; background-color: var(--bg);">
+    <div class="container" style="max-width: 1000px;">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <span style="background: var(--primary-light); color: var(--primary); font-weight: 700; font-size: 12px; padding: 6px 14px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 15px;">
+          📚 Centre de Conseils IRVE (06)
+        </span>
+        <h1 style="font-family: var(--font-heading); font-size: 36px; font-weight: 700; color: var(--primary); line-height: 1.25; margin-bottom: 15px;">
+          Guides Pratiques &amp; Réglementations
+        </h1>
+        <p style="font-size: 16px; color: var(--text-muted); max-width: 650px; margin: 0 auto; line-height: 1.6;">
+          Toutes les réponses à vos questions techniques, financières et juridiques sur la pose d'une wallbox à Nice, Cannes, Antibes et dans toutes les Alpes-Maritimes.
+        </p>
+      </div>
+
+      <!-- Guides Grid -->
+      <div class="guides-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+        {allGuides.map(guide => (
+          <a href={`/guides/${guide.slug}/`} style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 30px; transition: var(--transition); text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); hover:translate-y(-2px);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <span style="font-size: 11px; font-weight: 700; color: var(--accent); background: var(--primary-light); padding: 3px 8px; border-radius: 4px; text-transform: uppercase;">
+                  {guide.data.tags ? guide.data.tags[0] : "Guide"}
+                </span>
+                <span style="font-size: 12px; color: var(--text-muted);">{guide.data.publishDate}</span>
+              </div>
+              <h2 style="font-family: var(--font-heading); font-size: 20px; color: var(--primary); font-weight: 600; line-height: 1.35; margin: 0 0 12px;">
+                {guide.data.title}
+              </h2>
+              <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">
+                {guide.data.description}
+              </p>
+            </div>
+            <span style="font-size: 13.5px; color: var(--secondary); font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+              Lire le guide complet <span style="font-size: 15px;">→</span>
+            </span>
+          </a>
+        ))}
+      </div>
+
+      <!-- Quick simulator block -->
+      <div style="margin-top: 60px; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); color: white; padding: 40px; border-radius: var(--radius-md); text-align: center; border: 1px solid rgba(255, 255, 255, 0.1);">
+        <h3 style="color: white; font-family: var(--font-heading); font-size: 24px; margin-top: 0; font-weight: 600;">Vous souhaitez comparer des devis réels ?</h3>
+        <p style="color: var(--primary-light); font-size: 15px; max-width: 550px; margin: 10px auto 25px; line-height: 1.5;">
+          Obtenez une étude de conformité électrique complète et comparez 3 tarifs d'installateurs IRVE locaux certifiés.
+        </p>
+        <a href="/devis/" style="display: inline-block; background: var(--accent); color: var(--primary); font-family: var(--font-heading); font-weight: 700; padding: 12px 32px; border-radius: 50px; text-decoration: none; transition: var(--transition);">
+          Faire une demande de devis &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .guides-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
+  }
+</style>

@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import config from '../data/config.json';
+
+const title = `Bornes de Recharge Design & Wallbox Premium | ${config.brandName}`;
+const description = `Sélection de bornes de recharge esthétiques et discrètes (Keba, ABB, Easee) pour villas d'architecte et mas de standing sur la Côte d'Azur.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Wallbox Design Premium" }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup 
+    slot="head" 
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="static-page-section" style="padding: 50px 0 80px; background-color: var(--bg);">
+    <div class="container">
+      <div class="two-column-layout">
+        
+        <!-- Main Content -->
+        <div class="static-main-content rich-text" style="background: var(--card-bg); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+          <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 600; color: var(--primary); margin-bottom: 20px;">Bornes de Recharge Premium &amp; Intégration Architecturale</h1>
+          
+          <div style="margin-bottom: 30px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+            <img src="/images/guide-design.png" alt="Bornes de recharge design premium Keba, ABB, Easee" style="width: 100%; height: auto; max-height: 400px; object-fit: cover; display: block;" />
+          </div>
+          
+          <p>
+            Sur la Côte d'Azur, l'installation d'une borne de recharge dans le garage ou l'allée d'un mas à Mougins, d'une bastide à Valbonne ou d'une villa contemporaine à Cannes et Cap-d'Ail dépasse la simple nécessité technique. L'aspect visuel de l'équipement de recharge doit s'harmoniser avec l'architecture de la propriété. C'est pourquoi nos installateurs partenaires IRVE sélectionnent des wallbox au design épuré, fabriquées avec des matériaux nobles (aluminium anodisé, verre trempé, composites haute résistance) tout en intégrant des fonctionnalités domotiques avancées.
+          </p>
+
+          <h2>1. Notre Sélection de Wallbox Esthétiques et Haut de Gamme</h2>
+          <p>
+            Pour préserver l'harmonie visuelle de votre propriété azuréenne, voici les trois modèles de bornes de recharge leaders reconnus pour leur qualité architecturale et leur fiabilité technique :
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 30px; margin: 30px 0;">
+            <!-- Keba Card -->
+            <div style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 25px; display: flex; gap: 20px; align-items: flex-start;">
+              <span style="font-size: 36px; background: white; padding: 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">🇦🇹</span>
+              <div>
+                <h3 style="font-size: 19px; margin-bottom: 6px; color: var(--primary);">Keba KeContact P30 — La Robustesse Autrichienne</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">
+                  Un design épuré avec des angles adoucis et une face avant en polycarbonate de haute qualité résistante aux UV et aux chocs. Idéale pour une pose discrète en extérieur ou dans un garage double.
+                </p>
+                <span style="font-size: 12.5px; font-weight: bold; color: var(--secondary);">Puissance : jusqu'à 22 kW | RFID &amp; Connectée | OCPP</span>
+              </div>
+            </div>
+
+            <!-- ABB Terra -->
+            <div style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 25px; display: flex; gap: 20px; align-items: flex-start;">
+              <span style="font-size: 36px; background: white; padding: 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">🇨🇭</span>
+              <div>
+                <h3 style="font-size: 19px; margin-bottom: 6px; color: var(--primary);">ABB Terra AC Wallbox — L'Intégration Technologique</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">
+                  Un format vertical compact ultra-moderne avec un indicateur LED discret en forme d'arche. Conçue par le leader mondial des réseaux électriques, elle offre un haut niveau de protection contre le sel marin et l'humidité de la Côte d'Azur.
+                </p>
+                <span style="font-size: 12.5px; font-weight: bold; color: var(--secondary);">Puissance : 7.4 à 22 kW | Bluetooth / Wi-Fi / 4G | Lecteur RFID</span>
+              </div>
+            </div>
+
+            <!-- Easee One -->
+            <div style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 25px; display: flex; gap: 20px; align-items: flex-start;">
+              <span style="font-size: 36px; background: white; padding: 15px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">🇳🇴</span>
+              <div>
+                <h3 style="font-size: 19px; margin-bottom: 6px; color: var(--primary);">Easee One — Le Minimalisme Scandinave</h3>
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px;">
+                  La borne de recharge la plus compacte du marché (à peine plus grande qu'une brique de lait), dotée d'une face avant interchangeable disponible en 5 coloris (anthracite, blanc, rouge, bleu, noir) pour s'accorder précisément à la couleur de votre façade ou de votre portail.
+                </p>
+                <span style="font-size: 12.5px; font-weight: bold; color: var(--secondary);">Puissance : 7.4 kW | Connexion 4G eSIM gratuite intégrée</span>
+              </div>
+            </div>
+          </div>
+
+          <h2>2. Contraintes Réglementaires Architecturales (ABF)</h2>
+          <p>
+            De nombreuses communes des Alpes-Maritimes abritent des sites préservés, soumis à l'avis des <strong>Architectes des Bâtiments de France (ABF)</strong>. C'est le cas par exemple des centres historiques de Vence, Grasse, Villefranche-sur-Mer ou des zones côtières classées :
+          </p>
+          <ul style="margin-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Intégration invisible :</strong> Les câblages d'alimentation électrique doivent impérativement être enterrés ou dissimulés sous fourreaux peints aux teintes de la maçonnerie.</li>
+            <li><strong>Couleur de l'enveloppe :</strong> Les bornes de recharge visibles depuis la voie publique doivent adopter des teintes neutres (gris anthracite, ton pierre ou noir mat), excluant les coloris vifs.</li>
+            <li><strong>Fixation murale discrète :</strong> Une pose sur pied dissimulé par des massifs de bougainvilliers ou de lavandes est souvent privilégiée à une pose sur mur extérieur en pierre de taille.</li>
+          </ul>
+
+          <h2>3. Résistance aux Conditions Climatiques Côtières (Sel et Chaleur)</h2>
+          <p>
+            Le climat azuréen impose des contraintes physiques particulières au matériel électrique :
+          </p>
+          <ul style="margin-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Corrosion Saline :</strong> L'air marin chargé d'embruns accélère l'oxydation des métaux. Pour les bornes installées à proximité du littoral (Nice, Cannes, Antibes, Menton), nous utilisons exclusivement du matériel avec un indice de protection de l'enveloppe minimum de <strong>IP54 / IP55</strong> et des contacts en acier inoxydable.</li>
+            <li><strong>Contraintes Thermiques :</strong> Les fortes températures estivales dans le 06 provoquent une surchauffe naturelle de la borne lors des cycles de charge prolongés. Nos techniciens installent des wallbox dotées d'une régulation thermique interne automatique (derating) pour protéger les composants électroniques sans couper la charge.</li>
+          </ul>
+
+          <div style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); margin-top: 40px;">
+            <h3 style="margin-top: 0; color: var(--primary); font-size: 17px; font-weight: 600; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 15px;">🔗 Raccourcis Utiles</h3>
+            <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin-bottom: 0;">
+              <li>🛠️ <a href="/guide-installation/" style="color: var(--secondary); font-weight: 600;">Guide technique de câblage et normes NF C 15-100</a></li>
+              <li>🧮 <a href="/tarifs/" style="color: var(--secondary); font-weight: 600;">Consulter les tarifs d'installation 2026</a></li>
+              <li>💰 <a href="/aides-advenir/" style="color: var(--secondary); font-weight: 600;">Subventions ADVENIR et crédit d'impôt</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="static-sidebar">
+          <div class="sidebar-widget bg-purple-gradient">
+            <h3>🧮 Obtenir un devis Villa</h3>
+            <p>Faites installer une borne de recharge élégante parfaitement intégrée à l'architecture de votre villa. Étude de faisabilité gratuite.</p>
+            <a href="/devis/" class="sidebar-cta-gold">Simuler mon projet →</a>
+          </div>
+
+          <div class="sidebar-widget">
+            <h3>🔋 Recharge Domotique</h3>
+            <p style="font-size: 13px;">Nos bornes haut de gamme s'intègrent à vos protocoles domotiques de standing (Legrand, KNX, Schneider) pour suivre votre consommation sur tablette et écran tactile de contrôle de votre villa.</p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 992px) {
+    .two-column-layout {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

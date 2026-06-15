@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.borne-recharge-alpes-maritimes.fr/sitemap-index.xml
