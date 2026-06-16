@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.borne-recharge-alpes-maritimes.fr',
+  site: 'https://borne-recharge-alpes-maritimes.fr',
   output: 'static',
   adapter: cloudflare({
     imageService: 'passthrough'
